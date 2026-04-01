@@ -168,7 +168,7 @@ export default function Home() {
                 width={271}
                 height={230}
                 loading="eager"
-                className="h-auto w-[250px] md:w-full max-w-[420px] object-contain"
+                className="h-auto w-[200px] sm:w-[250px] md:w-full max-w-[420px] object-contain"
               />
               <p className="mt-6 max-w-2xl text-base leading-8 text-white/70">
                 We are a startup performance driven EPC Company focused on
