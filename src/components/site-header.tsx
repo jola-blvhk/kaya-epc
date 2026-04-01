@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export type SiteNavLink = {
   label: string;
@@ -10,6 +13,44 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({ navLinks }: SiteHeaderProps) {
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const details = detailsRef.current;
+    if (!details) return;
+
+    const onToggle = () => setMenuOpen(details.open);
+
+    details.addEventListener("toggle", onToggle);
+    setMenuOpen(details.open);
+    return () => details.removeEventListener("toggle", onToggle);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onPointerDown = (e: PointerEvent) => {
+      const details = detailsRef.current;
+      if (details && !details.contains(e.target as Node)) {
+        details.open = false;
+      }
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && detailsRef.current) {
+        detailsRef.current.open = false;
+      }
+    };
+
+    document.addEventListener("pointerdown", onPointerDown, true);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown, true);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
+
   return (
     <header className="relative border-b border-white/10 bg-black/20 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-6">
@@ -37,9 +78,9 @@ export function SiteHeader({ navLinks }: SiteHeaderProps) {
             ))}
           </nav>
 
-          <details className="group relative md:hidden">
+          <details ref={detailsRef} className="group relative md:hidden">
             <summary
-              className="cursor-pointer list-none rounded-lg border border-white/20 bg-white/5 p-2 text-white/90 marker:content-none"
+              className="cursor-pointer list-none text-white marker:content-none"
               aria-label="Toggle navigation menu"
             >
               <svg
@@ -57,12 +98,16 @@ export function SiteHeader({ navLinks }: SiteHeaderProps) {
                 />
               </svg>
             </summary>
-            <nav className="absolute right-0 z-20 mt-2 w-52 rounded-xl border border-white/15 bg-[#1E1E24]/95 p-2 shadow-xl backdrop-blur-sm">
+            <nav className="absolute right-0 z-20 mt-2 w-52 rounded-xl border border-white/15 bg-[#1E1E24]/50 p-2 shadow-xl backdrop-blur-sm">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   className="block rounded-lg px-3 py-2 text-sm text-white/85 transition hover:bg-white/10 hover:text-white"
+                  onClick={() => {
+                    const d = detailsRef.current;
+                    if (d) d.open = false;
+                  }}
                 >
                   {link.label}
                 </a>

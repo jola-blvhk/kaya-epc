@@ -75,11 +75,11 @@ function AspirationSealBadge({ className }: { className?: string }) {
 
 export default function Home() {
   const navLinks = [
-    { label: "Home", href: "#" },
+ 
     { label: "About", href: "#about" },
     { label: "Products", href: "#products" },
     { label: "Our Services", href: "#services" },
-    { label: "Contact Us", href: "#contact" },
+    
   ];
 
   const products: {
@@ -168,9 +168,9 @@ export default function Home() {
                 width={271}
                 height={230}
                 loading="eager"
-                className="h-auto w-[200px] sm:w-[250px] md:w-full max-w-[420px] object-contain"
+                className="h-auto w-[170px] sm:w-[250px] md:w-full max-w-[420px] object-contain"
               />
-              <p className="mt-6 max-w-2xl text-base leading-8 text-white/70">
+              <p className="mt-6 max-w-2xl leading-[190%] text-sm md:text-base md:leading-[200%]  tracking-[15%] ">
                 We are a startup performance driven EPC Company focused on
                 helping our client to meet their goals and objectives through
                 our experienced management and smart service delivery
@@ -178,6 +178,14 @@ export default function Home() {
                 providing high value products & services through our world
                 class partners.
               </p>
+              <div className="mt-8">
+                <a
+                  href="mailto:muhammed@kaya-epc.com"
+                  className="inline-flex rounded-full border border-white/40 bg-transparent px-10 py-3.5 text-sm font-medium leading-[200%] tracking-[15%] text-white transition hover:border-white/60 hover:bg-white/6"
+                >
+                  Contact us
+                </a>
+              </div>
             </div>
 
             <div className="col-span-12 lg:col-span-5">
@@ -187,10 +195,11 @@ export default function Home() {
                   alt=""
                   width={500}
                   height={500}
+                  priority
                   className="h-auto w-full max-w-[500px] object-contain"
                   aria-hidden="true"
                 />
-                <div className="absolute right-32 top-24 max-w-[220px] text-left text-4xl leading-[1.25] text-white/90">
+                <div className="absolute right-32 top-24 max-w-[220px] text-left text-4xl leading-tight">
                   Future
                   <br />
                   Energy &
@@ -204,7 +213,7 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="">
+      <section className="" id="services">
         <div className="mx-auto max-w-7xl  py-10 sm:py-12">
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
             {serviceHighlights.map((service) => (
@@ -253,7 +262,7 @@ export default function Home() {
         </div>
       </section>
 
-      <main className="relative mx-auto max-w-7xl space-y-[162px] px-6 pb-20 pt-[162px]">
+      <main className="relative mx-auto max-w-7xl space-y-16 px-6 pb-20 pt-16 sm:space-y-20 sm:pt-20 md:space-y-24 md:pt-24 lg:space-y-[122px] lg:pt-[122px] xl:space-y-[162px] xl:pt-[162px]">
         <section id="about" className="relative">
           <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-[122px]">
             <div className="relative z-0">
@@ -304,9 +313,9 @@ export default function Home() {
 
         <section
           id="services"
-          className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-[122px] "
+          className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-[122px]"
         >
-          <div className="relative min-h-[280px] w-full overflow-hidden rounded-2xl border border-white/10 sm:min-h-[360px] lg:min-h-[420px]">
+          <div className="relative order-2 min-h-[280px] w-full overflow-hidden rounded-2xl border border-white/10 sm:min-h-[360px] lg:order-1 lg:min-h-[420px]">
             <Image
               src={ourDriveImage}
               alt=""
@@ -316,7 +325,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-col justify-center">
+          <div className="order-1 flex flex-col justify-center lg:order-2">
             <h2 className="text-2xl font-medium tracking-[15%] leading-[200%]  sm:text-[32px]">
               Our Drive
             </h2>
